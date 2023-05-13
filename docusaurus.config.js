@@ -43,6 +43,8 @@ const config = {
           // Remove this to remove the "edit this page" links.
           // editUrl:
             // 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          docLayoutComponent: '@theme/DocPage',
+          docItemComponent: '@theme/ApiItem' // Derived from docusaurus-theme-openapi
         },
         blog: {
           showReadingTime: true,
@@ -61,8 +63,11 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      docs: {
+        sidebar: {
+          hideable: true
+        }
+      },
       navbar: {
         title: 'My Site',
         logo: {
@@ -78,11 +83,16 @@ const config = {
           },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
-            label: 'GitHub',
-            position: 'right',
+            label: "Core API",
+            position: "left",
+            to: "/docs/category/api/core"
           },
-        ],
+          {
+            href: "https://github.com/facebook/docusaurus",
+            label: "GitHub",
+            position: "right"
+          }
+        ]
       },
       footer: {
         style: 'dark',
@@ -132,8 +142,31 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-      },
+        additionalLanguages: []
+      }
     }),
+
+  plugins: [
+    [
+      "docusaurus-plugin-openapi-docs",
+      {
+        id: "openapi",
+        docsPluginId: "classic",
+        config: {
+          core: {
+            specPath: "api/core.yaml",
+            outputDir: "docs/api/core",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag"
+            }
+          }
+        }
+      }
+    ]
+  ],
+
+  themes: ["docusaurus-theme-openapi-docs"]
 };
 
 module.exports = config;

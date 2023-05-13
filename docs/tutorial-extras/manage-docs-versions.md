@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+tags:
+  - test
 ---
 
 # Manage Docs Versions
@@ -45,7 +47,7 @@ module.exports = {
 
 The docs version dropdown appears in your navbar:
 
-![Docs Version Dropdown](./img/docsVersionDropdown.png)
+![Docs Version Dropdown](/img/tutorial/docsVersionDropdown.png)
 
 ## Update an existing version
 
